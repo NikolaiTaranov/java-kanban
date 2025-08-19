@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Task {
     protected String name;
     protected String description;
@@ -5,14 +7,12 @@ public class Task {
     protected Statuses status;
 
     public Task(String name, String description) {
-        TaskManager.id++;
         this.name = name;
         this.description = description;
-        this.id = TaskManager.id;
         this.status = Statuses.NEW;
     }
 
-    public Task(String name, String description,int id){
+    public Task(String name, String description, int id, Statuses status){
         this.name = name;
         this.description = description;
         if (id <=0 ){
@@ -20,10 +20,17 @@ public class Task {
         } else {
             this.id = id;
         }
+        this.status = status;
     }
+
+    public Task(){}
 
     public int getId(){
         return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
     }
 
     @Override
@@ -35,4 +42,23 @@ public class Task {
                 ", status=" + status +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return id == task.id && Objects.equals(name, task.name) && Objects.equals(description, task.description) && status == task.status;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (int) (id ^ (id >>> 32)); // для long id
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
+    }
 }
+
+
