@@ -96,7 +96,7 @@ public class TaskManager {
             }
         }
 
-        findEpic.subList.clear();
+        findEpic.subtasksForEpic.clear();
         findEpic.status = Statuses.NEW;
     }
 
@@ -110,7 +110,7 @@ public class TaskManager {
         epic.setId(epic.id);
         if (epicList.containsKey(epic.getId())){
             epic.status = epicList.get(epic.getId()).status;
-            epic.subList = epicList.get(epic.getId()).returnSubList();
+            epic.subtasksForEpic = epicList.get(epic.getId()).returnSubList();
             epicList.put(epic.getId(), epic);
         }
     }

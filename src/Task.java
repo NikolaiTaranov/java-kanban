@@ -47,7 +47,7 @@ public class Task {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return id == task.id && Objects.equals(name, task.name) && Objects.equals(description, task.description) && status == task.status;
+        return id == task.id;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class Task {
         int result = 17;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (int) (id ^ (id >>> 32)); // для long id
+        result = 31 * result + (int) (id ^ (id >>> 32));
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }

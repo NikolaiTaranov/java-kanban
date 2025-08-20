@@ -3,3 +3,4 @@ public enum Statuses {
     IN_PROGRESS,
     DONE
 }
+

@@ -51,7 +51,7 @@ public class Main {
         System.out.println("Выведем все эпики");
         System.out.println(manager.returnEpicList());
         System.out.println("Все сабтаски эпика после удаления");
-        System.out.println("ХОТИМ НАЙТИ АЙДИ ЭПИКА " + manager.findById(4));
+        System.out.println("Айди эпика " + manager.findById(4));
         manager.removeSubForEpic(manager.findById(4));
         System.out.println("Все сабтаски " + manager.returnSubList());
 
