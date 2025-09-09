@@ -1,8 +1,8 @@
 import java.util.Objects;
 
 public class Task {
-    protected String name;
-    protected String description;
+    protected final String name;
+    protected final String description;
     protected int id;
     protected Statuses status;
 
@@ -23,13 +23,13 @@ public class Task {
         this.status = status;
     }
 
-    public Task(){}
+    //public Task(){}
 
     public int getId(){
         return id;
     }
 
-    public void setId(int id){
+    protected void setId(int id){
         this.id = id;
     }
 

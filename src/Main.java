@@ -1,7 +1,8 @@
 public class Main {
 
     public static void main(String[] args) {
-        TaskManager manager = new TaskManager();
+        InMemoryTaskManager manager = new InMemoryTaskManager();
+        //InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
 
         System.out.println("Create new Task");
         Task task1 = new Task("Прочитать книгу", "книга - Война и мар");
@@ -58,8 +59,16 @@ public class Main {
         System.out.println("Все сабтаски эпика " + manager.returnEpicsSub(epic2));
         System.out.println("Статус эпика");
         System.out.println(manager.findById(4));
+        manager.findById(5);
+        manager.findById(6);
+        manager.findById(7);
+        manager.findById(8);
+        manager.findById(9);
+        manager.findById(1);
+        manager.findById(3);
 
-
+        System.out.println("==============================");
+        System.out.println(manager.historyList.getHistory());
 
     }
 }
