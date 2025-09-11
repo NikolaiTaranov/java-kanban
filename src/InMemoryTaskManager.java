@@ -15,6 +15,10 @@ public class InMemoryTaskManager implements TaskManager {
     public static int id = 0;
     //int historyActualListSize = 0;
 
+    public HistoryManager getDefaultHistory(){
+        return historyList;
+    }
+
     public void createTask(Task task){
         id++;
         task.setId(id);
@@ -34,7 +38,7 @@ public class InMemoryTaskManager implements TaskManager {
         addToEpic(subtask);
     }
 
-    private void addToEpic(Subtask subtask){
+    public void addToEpic(Subtask subtask){
         for (Integer epicId: epicList.keySet()){
             if (epicId.equals(subtask.getEpicId())){
                 epicList.get(epicId).addToList(subtask);

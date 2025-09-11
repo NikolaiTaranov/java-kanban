@@ -2,6 +2,7 @@
 public class Managers <T extends HistoryManager> {
 
     InMemoryHistoryManager inMemoryHistoryManager = new InMemoryHistoryManager();
+    InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
     T taskManager;
     public Managers(T task){
         taskManager = task;

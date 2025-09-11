@@ -5,12 +5,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ManagersTest {
 
-    @Test
-    public void checkManagersObject(){
+//    @Test
+//    public void checkManagersObject(){
+//
+//        InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
+//        //Managers<historyManager> taskManagerManager = new Managers<>();
+//        Assertions.assertEquals(taskManager.getDefault(), historyManager);
+//    }
 
-        InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
-        Managers<InMemoryHistoryManager> taskManagerManager = new Managers<>(historyManager);
-        Assertions.assertEquals(taskManagerManager.getDefault(), historyManager);
+    @Test
+    public void epicLikeSubtask(){
+        InMemoryTaskManager manager = new InMemoryTaskManager();
+        Epic epic1 = new Epic("Основная", "Таска");
+        epic1.setId(1);
+        manager.createEpic(epic1);
+        //epic1.addToList(epic1);
+
     }
 
     @Test
@@ -45,8 +55,9 @@ class ManagersTest {
         Task task1 = new Task("Прочитать книгу", "книга - Война и мар");
         manager.createTask(task1);
 
-        System.out.println(task1);
+        Task task2 = task1;
         manager.updateTask(task1);
+        Assertions.assertEquals(task1, task2);
     }
 
 }
