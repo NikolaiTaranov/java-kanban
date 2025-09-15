@@ -148,6 +148,6 @@ import java.util.List;
 
      @Override
      public List<Task> getHistory() {
-         return List.of();
+         return historyManager.getHistory();
      }
  }
