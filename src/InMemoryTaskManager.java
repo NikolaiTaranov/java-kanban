@@ -9,12 +9,9 @@ import java.util.List;
     HashMap<Integer, Epic> epicList = new HashMap<>();
     HashMap<Integer, Subtask> subtaskList = new HashMap<>();
 
-    //private List<Task> historyList = new ArrayList<>();
     private final HistoryManager historyManager = Managers.getDefaultHistory();
 
     public static int id = 0;
-    //int historyActualListSize = 0;
-
 
     public void createTask(Task task){
         id++;

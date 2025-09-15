@@ -5,14 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ManagersTest {
 
-//    @Test
-//    public void checkManagersObject(){
-//
-//        InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
-//        //Managers<historyManager> taskManagerManager = new Managers<>();
-//        Assertions.assertEquals(taskManager.getDefault(), historyManager);
-//    }
-
     @Test
     public void epicLikeSubtask(){
         InMemoryTaskManager manager = new InMemoryTaskManager();

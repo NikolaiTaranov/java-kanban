@@ -27,22 +27,6 @@ public class Epic extends Task {
         }
     }
 
-
-
-
-//    public Epic(String name, String description, int id) {
-//        super(name, description);
-//        this.id = id;
-//    }
-
-//    public String getName(){
-//        return name;
-//    }
-
-//    public int getId (){
-//        return id;
-//    }
-
     public void addToList(Subtask subtask) {
         Subtask oldSub = null;
         if (subtasksForEpic.isEmpty()) {
