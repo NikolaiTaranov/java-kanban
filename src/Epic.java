@@ -1,26 +1,47 @@
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 public class Epic extends Task {
-    protected int id;
-    ArrayList<Subtask> subtasksForEpic = new ArrayList<>();
+    private List<Subtask> subtasksForEpic = new ArrayList<>();
 
     public Epic(String name, String description) {
         super(name, description);
         this.status = Statuses.NEW;
     }
 
-    public Epic(String name, String description, int id) {
-        super(name, description);
-        this.id = id;
+    public void updateStatus(Subtask subtask) {
+
+        HashSet<Statuses> uniqueStatuses = new HashSet<>();
+        for (Subtask sub : subtasksForEpic) {
+            uniqueStatuses.add(sub.status);
+        }
+        if (uniqueStatuses.isEmpty()) {
+            status = Statuses.NEW;
+        } else if (uniqueStatuses.contains(Statuses.NEW) && !uniqueStatuses.contains(Statuses.IN_PROGRESS) && !uniqueStatuses.contains(Statuses.DONE)) {
+            status = Statuses.NEW;
+        } else if (!uniqueStatuses.contains(Statuses.NEW) && !uniqueStatuses.contains(Statuses.IN_PROGRESS) && uniqueStatuses.contains(Statuses.DONE)) {
+            status = Statuses.DONE;
+        } else {
+            status = Statuses.IN_PROGRESS;
+        }
     }
 
-    public String getName(){
-        return name;
-    }
 
-    public int getId (){
-        return id;
-    }
+
+
+//    public Epic(String name, String description, int id) {
+//        super(name, description);
+//        this.id = id;
+//    }
+
+//    public String getName(){
+//        return name;
+//    }
+
+//    public int getId (){
+//        return id;
+//    }
 
     public void addToList(Subtask subtask) {
         Subtask oldSub = null;
@@ -43,7 +64,11 @@ public class Epic extends Task {
         subtasksForEpic.remove(sub);
     }
 
-    public ArrayList<Subtask> returnSubList(){
+    public List<Subtask> returnSubList(){
         return subtasksForEpic;
+    }
+
+    public void setSubtaskList (List<Subtask> list){
+        subtasksForEpic = list;
     }
 }

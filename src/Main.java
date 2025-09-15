@@ -37,9 +37,9 @@ public class Main {
         System.out.println(manager.returnSubList());
         System.out.println("Выведем все сабтаски эпика");
         System.out.println(manager.returnEpicsSub(epic2));
-        System.out.println("Обновим эпик");
-        manager.updateEpic(new Epic("Ремонт1", "на кухне1", 4));
-        System.out.println(manager.returnEpicList());
+        //System.out.println("Обновим эпик");
+        //manager.updateEpic(new Epic("Ремонт1", "на кухне1", 4));
+        //System.out.println(manager.returnEpicList());
         System.out.println("Обновим сабтаски");
         manager.updateSubtask(new Subtask("Натянуть потолки1", "черные", 5, 4, Statuses.DONE));
         //manager.updateSubtask(new Subtask("Натянуть потолки1", "черные1", 5, 4));
@@ -68,7 +68,7 @@ public class Main {
         manager.findById(3);
 
         System.out.println("==============================");
-        System.out.println(manager.historyList.getHistory());
+        //System.out.println(manager.historyManager.getHistory());
 
     }
 }

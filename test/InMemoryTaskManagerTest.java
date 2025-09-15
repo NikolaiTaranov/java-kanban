@@ -55,7 +55,7 @@ class InMemoryTaskManagerTest {
         }
 
         System.out.println("История:");
-        for (Task task : manager.getDefaultHistory().getHistory()) {
+        for (Task task : manager.getDefaultHistory()) {
             System.out.println(task);
         }
 

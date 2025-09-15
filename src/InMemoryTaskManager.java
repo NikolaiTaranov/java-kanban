@@ -4,20 +4,17 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-public class InMemoryTaskManager implements TaskManager {
+ public class InMemoryTaskManager implements TaskManager {
     HashMap<Integer, Task> taskList = new HashMap<>();
     HashMap<Integer, Epic> epicList = new HashMap<>();
     HashMap<Integer, Subtask> subtaskList = new HashMap<>();
 
     //private List<Task> historyList = new ArrayList<>();
-    HistoryManager historyList = new InMemoryHistoryManager();
+    private final HistoryManager historyManager = Managers.getDefaultHistory();
 
     public static int id = 0;
     //int historyActualListSize = 0;
 
-    public HistoryManager getDefaultHistory(){
-        return historyList;
-    }
 
     public void createTask(Task task){
         id++;
@@ -82,7 +79,7 @@ public class InMemoryTaskManager implements TaskManager {
             task = subtaskList.get(id);
         }
 
-        historyList.add(task);
+        historyManager.add(task);
 
         return task;
     }
@@ -113,7 +110,7 @@ public class InMemoryTaskManager implements TaskManager {
             }
         }
 
-        findEpic.subtasksForEpic.clear();
+        findEpic.returnSubList().clear();
         findEpic.status = Statuses.NEW;
     }
 
@@ -127,7 +124,7 @@ public class InMemoryTaskManager implements TaskManager {
         epic.setId(epic.id);
         if (epicList.containsKey(epic.getId())){
             epic.status = epicList.get(epic.getId()).status;
-            epic.subtasksForEpic = epicList.get(epic.getId()).returnSubList();
+            epic.setSubtaskList(epicList.get(epic.getId()).returnSubList());
             epicList.put(epic.getId(), epic);
         }
     }
@@ -140,27 +137,20 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
-    public ArrayList<Subtask> returnEpicsSub(Epic epic){
+    public List<Subtask> returnEpicsSub(Epic epic){
         return epic.returnSubList();
     }
 
     private void updateEpicStatus(Subtask subtask){
         for (Epic epic: epicList.values()) {
             if (epic.getId() == subtask.getEpicId()) {
-                HashSet<Statuses> uniqueStatuses = new HashSet<>();
-                for (Subtask sub: epic.returnSubList()){
-                    uniqueStatuses.add(sub.status);
-                }
-                if (uniqueStatuses.isEmpty()){
-                    epic.status = Statuses.NEW;
-                } else if (uniqueStatuses.contains(Statuses.NEW) && !uniqueStatuses.contains(Statuses.IN_PROGRESS) && !uniqueStatuses.contains(Statuses.DONE)){
-                    epic.status = Statuses.NEW;
-                } else if (!uniqueStatuses.contains(Statuses.NEW) && !uniqueStatuses.contains(Statuses.IN_PROGRESS) && uniqueStatuses.contains(Statuses.DONE)){
-                    epic.status = Statuses.DONE;
-                } else {
-                    epic.status = Statuses.IN_PROGRESS;
-                }
+                epic.updateStatus(subtask);
             }
         }
     }
-}
+
+     @Override
+     public List<Task> getHistory() {
+         return List.of();
+     }
+ }

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public interface TaskManager {
+public interface TaskManager extends Managers {
     void removeAllTasks();
 
     void removeAllEpics();
@@ -23,6 +23,7 @@ public interface TaskManager {
 
     public void createSubtask(Subtask subtask);
 
-    public HistoryManager getDefaultHistory();
+    public List<Task> getHistory();
+
 
 }
